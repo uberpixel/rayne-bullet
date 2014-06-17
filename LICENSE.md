@@ -1,0 +1,1 @@
+rayne-bullet is released under the MIT license, Bullet is released under the Zlib license.
