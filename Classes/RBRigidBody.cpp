@@ -214,7 +214,7 @@ namespace RN
 			worldTrans.setOrigin(btVector3(position.x, position.y, position.z));
 		}
 		
-		void RigidBody::setWorldTransform(const btTransform &worldTrans)8
+		void RigidBody::setWorldTransform(const btTransform &worldTrans)
 		{
 			if(!GetParent())
 				return;

@@ -41,6 +41,8 @@ namespace RN
 			
 			_dynamicsWorld = new btDiscreteDynamicsWorld(_dispatcher, _broadphase, _constraintSolver, _collisionConfiguration);
 			_dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
+			
+			_dynamicsWorld->setInternalTickCallback(&PhysicsWorld::SimulationStepTickCallback);
 		}
 		
 		PhysicsWorld::~PhysicsWorld()
@@ -53,7 +55,22 @@ namespace RN
 			delete _pairCallback;
 		}
 		
-		
+		void PhysicsWorld::SimulationStepTickCallback(btDynamicsWorld *world, btScalar timeStep)
+		{
+			int numManifolds = world->getDispatcher()->getNumManifolds();
+			for (int i=0;i<numManifolds;i++)
+			{
+				btPersistentManifold *contactManifold =  world->getDispatcher()->getManifoldByIndexInternal(i);
+				CollisionObject *objectA = static_cast<CollisionObject *>(contactManifold->getBody0()->getUserPointer());
+				CollisionObject *objectB = static_cast<CollisionObject *>(contactManifold->getBody1()->getUserPointer());
+				
+				if(objectA->_callback)
+					objectA->_callback(objectB);
+				
+				if(objectB->_callback)
+					objectB->_callback(objectA);
+			}
+		}
 		
 		void PhysicsWorld::SetGravity(const Vector3 &gravity)
 		{

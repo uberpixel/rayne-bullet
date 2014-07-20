@@ -66,6 +66,11 @@ namespace RN
 			}
 		}
 		
+		void CollisionObject::SetContactCallback(std::function<void (CollisionObject *)> &&callback)
+		{
+			_callback = std::move(callback);
+		}
+		
 		void CollisionObject::ReInsertIntoWorld()
 		{
 			if(_owner)
