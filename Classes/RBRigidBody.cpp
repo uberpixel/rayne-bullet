@@ -92,15 +92,36 @@ namespace RN
 			_rigidBody->setCcdSweptSphereRadius(radius);
 		}
 		
-		Vector3 RigidBody::GetLinearVelocity()
+		Vector3 RigidBody::GetLinearVelocity() const
 		{
 			const btVector3& velocity = _rigidBody->getLinearVelocity();
 			return Vector3(velocity.x(), velocity.y(), velocity.z());
 		}
-		Vector3 RigidBody::GetAngularVelocity()
+		Vector3 RigidBody::GetAngularVelocity() const
 		{
 			const btVector3& velocity = _rigidBody->getAngularVelocity();
 			return Vector3(velocity.x(), velocity.y(), velocity.z());
+		}
+		
+		
+		Vector3 RigidBody::GetCenterOfMass() const
+		{
+			const btVector3& center = _rigidBody->getCenterOfMassPosition();
+			return Vector3(center.x(), center.y(), center.z());
+		}
+		Matrix RigidBody::GetCenterOfMassTransform() const
+		{
+			const btTransform& transform = _rigidBody->getCenterOfMassTransform();
+			
+			btQuaternion rotation = transform.getRotation();
+			btVector3 position    = transform.getOrigin();
+			
+			Matrix matrix;
+			
+			matrix.Translate(Vector3(position.x(), position.y(), position.z()));
+			matrix.Rotate(Quaternion(rotation.x(), rotation.y(), rotation.z(), rotation.w()));
+			
+			return matrix;
 		}
 		
 		
@@ -193,7 +214,7 @@ namespace RN
 			worldTrans.setOrigin(btVector3(position.x, position.y, position.z));
 		}
 		
-		void RigidBody::setWorldTransform(const btTransform &worldTrans)
+		void RigidBody::setWorldTransform(const btTransform &worldTrans)8
 		{
 			if(!GetParent())
 				return;
