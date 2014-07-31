@@ -92,6 +92,16 @@ namespace RN
 			_rigidBody->setCcdSweptSphereRadius(radius);
 		}
 		
+		void RigidBody::SetGravity(const RN::Vector3 &gravity)
+		{
+			_rigidBody->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
+		}
+		
+		void RigidBody::SetDamping(float linear, float angular)
+		{
+			_rigidBody->setDamping(linear, angular);
+		}
+		
 		Vector3 RigidBody::GetLinearVelocity() const
 		{
 			const btVector3& velocity = _rigidBody->getLinearVelocity();
@@ -207,8 +217,8 @@ namespace RN
 			if(!GetParent())
 				return;
 			
-			Quaternion rotation = std::move(GetRotation());
-			Vector3    position = std::move(GetPosition() - rotation.GetRotatedVector(offset));
+			Quaternion rotation = std::move(GetWorldRotation());
+			Vector3    position = std::move(GetWorldPosition() - rotation.GetRotatedVector(offset));
 			
 			worldTrans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));
 			worldTrans.setOrigin(btVector3(position.x, position.y, position.z));
@@ -222,8 +232,8 @@ namespace RN
 			btQuaternion rotation = worldTrans.getRotation();
 			btVector3 position    = worldTrans.getOrigin();
 			
-			SetRotation(Quaternion(rotation.x(), rotation.y(), rotation.z(), rotation.w()));
-			SetPosition(Vector3(position.x(), position.y(), position.z()) + GetRotation().GetRotatedVector(offset));
+			SetWorldRotation(Quaternion(rotation.x(), rotation.y(), rotation.z(), rotation.w()));
+			SetWorldPosition(Vector3(position.x(), position.y(), position.z()) + GetWorldRotation().GetRotatedVector(offset));
 		}
 	}
 }

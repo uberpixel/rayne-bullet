@@ -43,6 +43,8 @@ namespace RN
 			void SetAngularVelocity(const Vector3 &velocity);
 			void SetCCDMotionThreshold(float threshold);
 			void SetCCDSweptSphereRadius(float radius);
+			void SetGravity(const Vector3 &gravity);
+			void SetDamping(float linear, float angular);
 			
 			void ApplyForce(const Vector3 &force);
 			void ApplyForce(const Vector3 &force, const Vector3 &origin);

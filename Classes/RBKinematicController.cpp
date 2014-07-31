@@ -65,6 +65,10 @@ namespace RN
 		{
 			_controller->setMaxSlope(maxSlope);
 		}
+		void KinematicController::SetGravity(float gravity)
+		{
+			_controller->setGravity(gravity);
+		}
 		
 		
 		bool KinematicController::IsOnGround()
@@ -88,7 +92,7 @@ namespace RN
 			btTransform transform = _ghost->getWorldTransform();
 			btVector3 &position = transform.getOrigin();
 			
-			SetPosition(Vector3(position.x(), position.y(), position.z()) + offset);
+			SetWorldPosition(Vector3(position.x(), position.y(), position.z()) + offset);
 		}
 		
 		
@@ -98,7 +102,7 @@ namespace RN
 			
 			if(changeSet & SceneNode::ChangeSet::Position)
 			{
-				Vector3 position = GetPosition() - offset;
+				Vector3 position = GetWorldPosition() - offset;
 				_controller->warp(btVector3(position.x, position.y, position.z));
 			}
 		}
@@ -114,7 +118,7 @@ namespace RN
 			CollisionObject::InsertIntoWorld(world);
 			
 			{
-				Vector3 position = GetPosition() - offset;
+				Vector3 position = GetWorldPosition() - offset;
 				_controller->warp(btVector3(position.x, position.y, position.z));
 			}
 			

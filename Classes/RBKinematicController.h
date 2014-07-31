@@ -39,6 +39,7 @@ namespace RN
 			void SetJumpSpeed(float speed);
 			void SetMaxJumpHeight(float maxHeight);
 			void SetMaxSlope(float maxSlope);
+			void SetGravity(float gravity);
 			
 			void Update(float delta) override;
 			

@@ -127,7 +127,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RB;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Überpixel";
 			};
 			buildConfigurationList = E9954BC818733129001F84D1 /* Build configuration list for PBXProject "rayne-bullet" */;
@@ -251,6 +251,7 @@
 		E9954BD218733129001F84D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -279,6 +280,7 @@
 		E9954BD318733129001F84D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
