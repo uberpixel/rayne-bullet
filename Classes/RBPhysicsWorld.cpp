@@ -105,6 +105,7 @@ namespace RN
 				hit.node     = body->GetParent();
 				hit.position = Vector3(rayCallback.m_hitPointWorld.x(), rayCallback.m_hitPointWorld.y(), rayCallback.m_hitPointWorld.z());
 				hit.normal   = Vector3(rayCallback.m_hitNormalWorld.x(), rayCallback.m_hitNormalWorld.y(), rayCallback.m_hitNormalWorld.z());
+				hit.distance = hit.position.GetDistance(from);
 			}
 			
 			return hit;
