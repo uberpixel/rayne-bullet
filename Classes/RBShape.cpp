@@ -29,6 +29,7 @@ namespace RN
 		RNDefineMeta(CapsuleShape, Shape)
 		RNDefineMeta(StaticPlaneShape, Shape)
 		RNDefineMeta(TriangleMeshShape, Shape)
+		RNDefineMeta(CompoundShape, Shape)
 		
 		Shape::Shape() :
 			_shape(nullptr)
@@ -259,6 +260,31 @@ namespace RN
 					break;
 				}
 			}
+		}
+		
+		CompoundShape::CompoundShape()
+		{
+			_shape = new btCompoundShape();
+		}
+		
+		CompoundShape::~CompoundShape()
+		{
+			for(auto shape : _shapes)
+			{
+				shape->Release();
+			}
+		}
+		
+		void CompoundShape::AddChild(Shape *shape, const RN::Vector3 &position, const RN::Quaternion &rotation)
+		{
+			btCompoundShape *compoundShape = static_cast<btCompoundShape *>(_shape);
+			
+			_shapes.push_back(shape->Retain());
+			
+			btTransform transform;
+			transform.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));
+			transform.setOrigin(btVector3(position.x, position.y, position.z));
+			compoundShape->addChildShape(transform, shape->GetBulletShape());
 		}
 	}
 }

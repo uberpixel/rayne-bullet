@@ -24,11 +24,12 @@ namespace RN
 	{
 		RNDefineMeta(KinematicController, CollisionObject)
 		
-		KinematicController::KinematicController(Shape *shape, float stepHeight) :
-			_shape(shape->Retain())
+		KinematicController::KinematicController(Shape *shape, float stepHeight, Shape *ghostShape) :
+			_shape(shape->Retain()), _ghostShape(ghostShape?ghostShape:shape)
 		{
+			_ghostShape->Retain();
 			_ghost = new btPairCachingGhostObject();
-			_ghost->setCollisionShape(_shape->GetBulletShape());
+			_ghost->setCollisionShape(_ghostShape->GetBulletShape());
 			_ghost->setCollisionFlags(_ghost->getCollisionFlags() | btCollisionObject::CF_CHARACTER_OBJECT);
 			_ghost->setUserPointer(this);
 			
@@ -42,6 +43,8 @@ namespace RN
 		{
 			delete _ghost;
 			delete _controller;
+			_ghostShape->Release();
+			_shape->Release();
 		}
 		
 		

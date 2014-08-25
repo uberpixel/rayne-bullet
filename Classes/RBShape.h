@@ -123,6 +123,19 @@ namespace RN
 			
 			RNDeclareMeta(TriangleMeshShape)
 		};
+		
+		class CompoundShape : public Shape
+		{
+		public:
+			CompoundShape();
+			~CompoundShape();
+			void AddChild(Shape *shape, const RN::Vector3 &position, const RN::Quaternion &rotation);
+			
+		private:
+			std::vector<Shape *> _shapes;
+			
+			RNDeclareMeta(CompoundShape)
+		};
 	}
 }
 
