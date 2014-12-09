@@ -35,6 +35,7 @@ namespace RN
 			void SetGravity(const Vector3 &gravity);
 			
 			void StepWorld(float delta) override;
+			void SetStepSize(double stepsize, int maxsteps);
 			
 			Hit CastRay(const Vector3 &from, const Vector3 &to);
 			
@@ -52,6 +53,9 @@ namespace RN
 			btOverlappingPairCallback *_pairCallback;
 			
 			static void SimulationStepTickCallback(btDynamicsWorld *world, btScalar timeStep);
+			
+			double _stepSize;
+			int _maxSteps;
 			
 			std::unordered_set<CollisionObject *> _collisionObjects;
 			

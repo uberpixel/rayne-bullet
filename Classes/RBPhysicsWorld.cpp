@@ -26,6 +26,7 @@ namespace RN
 		RNDefineSingleton(PhysicsWorld)
 		
 		PhysicsWorld::PhysicsWorld(const Vector3 &gravity)
+		:_maxSteps(10), _stepSize(1.0/60.0)
 		{
 			MakeShared();
 			
@@ -78,9 +79,15 @@ namespace RN
 			_dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 		}
 		
+		void PhysicsWorld::SetStepSize(double stepsize, int maxsteps)
+		{
+			_stepSize = stepsize;
+			_maxSteps = maxsteps;
+		}
+		
 		void PhysicsWorld::StepWorld(float delta)
 		{
-			_dynamicsWorld->stepSimulation(delta, 10);
+			_dynamicsWorld->stepSimulation(delta, _maxSteps, _stepSize);
 		}
 		
 		
