@@ -219,7 +219,7 @@ namespace RN
 						vertex2 = reinterpret_cast<const Vector3 *>(pospointer + stride * (*index ++));
 						vertex3 = reinterpret_cast<const Vector3 *>(pospointer + stride * (*index ++));
 						
-						_triangleMesh->addTriangle(btVector3(vertex1->x, vertex1->y, vertex1->z), btVector3(vertex2->x, vertex2->y, vertex2->z), btVector3(vertex3->x, vertex3->y, vertex3->z));
+						_triangleMesh->addTriangle(btVector3(vertex1->x, vertex1->y, vertex1->z), btVector3(vertex2->x, vertex2->y, vertex2->z), btVector3(vertex3->x, vertex3->y, vertex3->z), true);
 					}
 					
 					break;
@@ -237,7 +237,7 @@ namespace RN
 						vertex3 = reinterpret_cast<const Vector3 *>(pospointer + stride * index[2]);
 						
 						index += 3;
-						_triangleMesh->addTriangle(btVector3(vertex1->x, vertex1->y, vertex1->z), btVector3(vertex2->x, vertex2->y, vertex2->z), btVector3(vertex3->x, vertex3->y, vertex3->z));
+						_triangleMesh->addTriangle(btVector3(vertex1->x, vertex1->y, vertex1->z), btVector3(vertex2->x, vertex2->y, vertex2->z), btVector3(vertex3->x, vertex3->y, vertex3->z), true);
 					}
 					
 					break;
@@ -254,7 +254,7 @@ namespace RN
 						vertex2 = reinterpret_cast<const Vector3 *>(pospointer + stride * (*index ++));
 						vertex3 = reinterpret_cast<const Vector3 *>(pospointer + stride * (*index ++));
 						
-						_triangleMesh->addTriangle(btVector3(vertex1->x, vertex1->y, vertex1->z), btVector3(vertex2->x, vertex2->y, vertex2->z), btVector3(vertex3->x, vertex3->y, vertex3->z));
+						_triangleMesh->addTriangle(btVector3(vertex1->x, vertex1->y, vertex1->z), btVector3(vertex2->x, vertex2->y, vertex2->z), btVector3(vertex3->x, vertex3->y, vertex3->z), true);
 					}
 					
 					break;
