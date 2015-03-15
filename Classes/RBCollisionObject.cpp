@@ -71,6 +71,11 @@ namespace RN
 			_callback = std::move(callback);
 		}
 		
+		void CollisionObject::SetPositionOffset(RN::Vector3 offset)
+		{
+			this->offset = offset;
+		}
+		
 		void CollisionObject::ReInsertIntoWorld()
 		{
 			if(_owner)

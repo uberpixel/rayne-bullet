@@ -40,6 +40,7 @@ namespace RN
 			void SetCollisionFilterMask(short int mask);
 			void SetMaterial(PhysicsMaterial *material);
 			void SetContactCallback(std::function<void(CollisionObject *)> &&callback);
+			void SetPositionOffset(RN::Vector3 offset);
 			
 			short int GetCollisionFilter() const { return _collisionFilter; }
 			short int GetCollisionFilterMask() const { return _collisionFilterMask; }
@@ -56,7 +57,6 @@ namespace RN
 			virtual void UpdateFromMaterial(PhysicsMaterial *material) = 0;
 			virtual void InsertIntoWorld(PhysicsWorld *world);
 			virtual void RemoveFromWorld(PhysicsWorld *world);
-			
 			Vector3 offset;
 			
 		private:
